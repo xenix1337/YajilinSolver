@@ -90,4 +90,5 @@ void YajilinBoard::AddClue(int i, Clue c)
 	}
 #endif
 	m_clues[i] = c;
+	m_tiles[i] = BLOCKADE_GIVEN;
 }

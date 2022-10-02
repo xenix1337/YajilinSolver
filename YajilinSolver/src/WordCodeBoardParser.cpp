@@ -27,7 +27,6 @@ YajilinBoard WordCodeBoardParser::Parse(std::string s)
 		if (dir != Direction::UNDEFINED) {
 			int val = atoi(word.substr(0, word.length() - 1).c_str());
 			returnBoard.AddClue(i, Clue(dir, val));
-			returnBoard.SetTile(i, Tile::BLOCKADE_GIVEN);
 			continue;
 		}
 
