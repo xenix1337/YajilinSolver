@@ -30,7 +30,11 @@
 *.exe
 *.out
 *.app
-/.vs/YajilinSolver
 /bin
-/YajilinSolver
-/YajilinSolver.sln
+
+# Project files
+/.vs/YajilinSolver
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
