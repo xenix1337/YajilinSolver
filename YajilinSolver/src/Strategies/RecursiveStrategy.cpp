@@ -40,7 +40,7 @@ bool RecursiveStrategy::SolveStep(YajilinBoard* board, STiles& tiles)
 
 int32_t RecursiveStrategy::FindLeastEntropyTile(STiles& tiles)
 {
-    int32_t min = 99;
+    size_t min = 99;
     int32_t minIndex = -1;
     for (int i = 0; i < tiles.size(); i++) {
         if (tiles[i].solved) continue;

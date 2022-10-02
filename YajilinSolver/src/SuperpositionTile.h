@@ -45,14 +45,14 @@ struct SuperpositionTile {
 	}
 
 	bool RemovePossible(Tile t) {
-		int s = possibles.size();
+		size_t s = possibles.size();
 		possibles.erase(std::remove(possibles.begin(), possibles.end(), t), possibles.end());
 		CheckForSolved();
 		return (s != possibles.size());
 	}
 
 	bool RemovePossibleDirection(int32_t directionMask) {
-		int s = possibles.size();
+		size_t s = possibles.size();
 		possibles.erase(
 			std::remove_if(possibles.begin(), possibles.end(), 
 				[directionMask](Tile& t) { return (t & directionMask); }
@@ -62,7 +62,7 @@ struct SuperpositionTile {
 	}
 
 	bool KeepOnlyPossibleDirection(int32_t directionMask) {
-		int s = possibles.size();
+		size_t s = possibles.size();
 		possibles.erase(
 			std::remove_if(possibles.begin(), possibles.end(),
 				[directionMask](Tile& t) { return !(t & directionMask); }
