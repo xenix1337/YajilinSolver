@@ -1,0 +1,56 @@
+#include "RecursiveStrategy.h"
+
+#include "../YajilinSolver.h"
+
+#include <iostream>
+
+RecursiveStrategy::RecursiveStrategy(int32_t recursionDepth)
+{
+    m_recursionDepth = recursionDepth;
+}
+
+bool RecursiveStrategy::SolveStep(YajilinBoard* board, STiles& tiles)
+{
+    bool stepSucceed = false;
+
+    int32_t leastEntropyTile = FindLeastEntropyTile(tiles); //TODO: Sort by entropy
+    if (leastEntropyTile == -1) return false;
+
+    YajilinSolver solver(m_recursionDepth - 1);
+    auto& st = tiles[leastEntropyTile];
+    for (Tile t : st.possibles) {
+        STiles tilesCopy = tiles;
+        tilesCopy[leastEntropyTile].Set(t);
+
+        STiles result = solver.Solve(board, tilesCopy);
+        BoardStatus status = SuperpositionTile::GetBoardStatus(result);
+        if (status == BoardStatus::IMPOSSIBLE) {
+            stepSucceed |= tiles[leastEntropyTile].RemovePossible(t);
+        }
+        else if (status == BoardStatus::SOLVED) {
+            stepSucceed = true;
+            tiles = result;
+        }
+
+        if (stepSucceed) return true; // Return from this strategy as soon as possible, as it is slow.
+    }
+
+    return stepSucceed;
+}
+
+int32_t RecursiveStrategy::FindLeastEntropyTile(STiles& tiles)
+{
+    int32_t min = 99;
+    int32_t minIndex = -1;
+    for (int i = 0; i < tiles.size(); i++) {
+        if (tiles[i].solved) continue;
+        if (tiles[i].possibles.size() == 1) continue;
+
+        if (tiles[i].possibles.size() < min) {
+            min = tiles[i].possibles.size();
+            minIndex = i;
+        }
+        if (min == 2) break;
+    }
+    return minIndex;
+}

@@ -1,0 +1,15 @@
+#pragma once
+
+
+enum Tile {
+	EMPTY,
+	UP_LEFT = 9,
+	UP_RIGHT = 3,
+	UP_DOWN = 5,
+	DOWN_LEFT = 12,
+	DOWN_RIGHT = 6,
+	LEFT_RIGHT = 10,
+	BLOCKADE = 32,
+	BLOCKADE_GIVEN = 64,
+	INVALID
+};
