@@ -1,8 +1,12 @@
 #include <iostream>
 
 #include "ArgumentParser.h"
+
 #include "WordCodeBoardParser.h"
+#include "PuzzlinkBoardParser.h"
+
 #include "AsciiBoardOutput.h"
+
 #include "YajilinSolver.h"
 
 void print_help() {
@@ -26,18 +30,19 @@ int main(int argc, char** argv) {
 	}
 
 	BoardParser* parser;
-	std::string parserType = argumentParser.GetString("i", "code");
+	std::string parserType = argumentParser.GetString("i", "puzzlink");
 	if (parserType == "code") parser = new WordCodeBoardParser();
-	else if (parserType == "puzzlink") { throw std::runtime_error("Not implemented"); return 0; }
+	else if (parserType == "puzzlink") parser = new PuzzlinkBoardParser();
 	else {
 		std::cerr << "Unknown input parser: " << parserType << std::endl;
 		std::cerr << "Supported input parsers: code, puzzlink" << std::endl;
 		return 0;
 	}
 	//auto board = parser->Parse("5 5 0 0 0 0 0 0 0 0R 0 0 0 0 0 2L 0 0R 0 0 0 0 0 0 0 0 0");
-	auto board = parser->Parse("10 10 0 0 0 0 0 2L 0 0 0 0 0 0 0 0 0 0 0 0 0 3D 0 0 0 0 0 0 2D 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2L 0 0 0 0 0 0 0 0 0 0 0 2R 0 0 0 0 0 0 0 0 2D 0 0 0 0 0 2U 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1L 0 0 0 0 0 0 0 0 0 0 0 0 0");
+	//auto board = parser->Parse("10 10 0 0 0 0 0 2L 0 0 0 0 0 0 0 0 0 0 0 0 0 3D 0 0 0 0 0 0 2D 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2L 0 0 0 0 0 0 0 0 0 0 0 2R 0 0 0 0 0 0 0 0 2D 0 0 0 0 0 2U 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1L 0 0 0 0 0 0 0 0 0 0 0 0 0");
+	auto board = parser->Parse("https://puzz.link/p?yajilin/10/10/l42i41m32f11a22b21a21m32b12i31l11121140f");
 
-	YajilinSolver solver(argumentParser.GetInt("d", 5));
+	YajilinSolver solver(argumentParser.GetInt("d", 0));
 	solver.Solve(&board);
 
 	BoardOutput* output = new AsciiBoardOutput();
