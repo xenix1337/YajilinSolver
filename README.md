@@ -11,6 +11,7 @@
 - Remove redundant code, restructurize some classes
 - Enhance strategies to let them do more before using slow recursion
 - Add more input/output types
+- Unit testing
 
 ### Example output
 ```
