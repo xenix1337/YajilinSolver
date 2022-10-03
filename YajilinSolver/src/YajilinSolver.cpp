@@ -9,6 +9,7 @@
 #include "Strategies/RecursiveStrategy.h"
 
 #include "AsciiBoardOutput.h"
+#include "SolutionVerifier.h"
 
 YajilinSolver::YajilinSolver(int32_t allowedRecurenceDepth)
 {
@@ -57,9 +58,13 @@ STiles YajilinSolver::Solve(STiles tiles)
     bool didStepSucceed;
     do {
         didStepSucceed = false;
-
+        /*
         auto status = SuperpositionTile::GetBoardStatus(tiles);
         if (status == IMPOSSIBLE) return tiles;
+        */
+        SolutionVerifier verifier;
+        SolutionStatus status = verifier.VerifySolution(m_currentBoard, tiles);
+        if (status == SolutionStatus::IMPOSSIBLE) return tiles;
 
         for (auto strategy : m_strategies) {
             bool stratSucceed = strategy->SolveStep(m_currentBoard, tiles);

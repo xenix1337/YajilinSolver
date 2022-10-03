@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 	//auto board = parser->Parse("10 10 0 0 0 0 0 2L 0 0 0 0 0 0 0 0 0 0 0 0 0 3D 0 0 0 0 0 0 2D 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2L 0 0 0 0 0 0 0 0 0 0 0 2R 0 0 0 0 0 0 0 0 2D 0 0 0 0 0 2U 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1L 0 0 0 0 0 0 0 0 0 0 0 0 0");
 	auto board = parser->Parse("https://puzz.link/p?yajilin/10/10/l42i41m32f11a22b21a21m32b12i31l11121140f");
 
-	YajilinSolver solver(argumentParser.GetInt("d", 0));
+	YajilinSolver solver(argumentParser.GetInt("d", 5));
 	solver.Solve(&board);
 
 	BoardOutput* output = new AsciiBoardOutput();
