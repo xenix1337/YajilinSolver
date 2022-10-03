@@ -1,6 +1,7 @@
 #include "RecursiveStrategy.h"
 
 #include "../YajilinSolver.h"
+#include "../SolutionVerifier.h"
 
 #include <iostream>
 
@@ -23,11 +24,16 @@ bool RecursiveStrategy::SolveStep(YajilinBoard* board, STiles& tiles)
         tilesCopy[leastEntropyTile].Set(t);
 
         STiles result = solver.Solve(board, tilesCopy);
-        BoardStatus status = SuperpositionTile::GetBoardStatus(result);
-        if (status == BoardStatus::IMPOSSIBLE) {
+        // A guess could lead to seemingly working solution, but incorrect. We have to ensure that
+        // we discard any illegal solution.
+
+        SolutionVerifier verifier;
+        SolutionStatus status = verifier.VerifySolution(board, result);
+
+        if (status == SolutionStatus::IMPOSSIBLE) {
             stepSucceed |= tiles[leastEntropyTile].RemovePossible(t);
         }
-        else if (status == BoardStatus::SOLVED) {
+        else if (status == SolutionStatus::COMPLETE) {
             stepSucceed = true;
             tiles = result;
         }
