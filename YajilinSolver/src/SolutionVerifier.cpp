@@ -21,6 +21,8 @@ SolutionStatus SolutionVerifier::VerifySolution(YajilinBoard* board, STiles& til
     // Note: This is redundant code from ResolveArrowsStrategy. No idea how to reuse code smartly now.
 	auto& clues = board->GetClues();
 	for (auto& clue : clues) {
+		if (clue.second.direction == Direction::UNDEFINED) continue;
+
         auto delta = GetDeltaMove(clue.second.direction);
         int deltaX = delta.first, deltaY = delta.second;
 
