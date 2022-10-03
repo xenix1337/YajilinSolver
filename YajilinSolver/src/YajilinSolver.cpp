@@ -58,10 +58,7 @@ STiles YajilinSolver::Solve(STiles tiles)
     bool didStepSucceed;
     do {
         didStepSucceed = false;
-        /*
-        auto status = SuperpositionTile::GetBoardStatus(tiles);
-        if (status == IMPOSSIBLE) return tiles;
-        */
+
         SolutionVerifier verifier;
         SolutionStatus status = verifier.VerifySolution(m_currentBoard, tiles);
         if (status == SolutionStatus::IMPOSSIBLE) return tiles;

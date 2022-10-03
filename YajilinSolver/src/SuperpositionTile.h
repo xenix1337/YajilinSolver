@@ -5,12 +5,6 @@
 
 #include "Tile.h"
 
-enum BoardStatus {
-	UNSOLVED,
-	SOLVED,
-	IMPOSSIBLE
-};
-
 struct SuperpositionTile;
 typedef std::vector<SuperpositionTile> STiles;
 
@@ -85,17 +79,5 @@ struct SuperpositionTile {
 		possibles.push_back(t);
 		solved = true;
 		return true;
-	}
-
-	static BoardStatus GetBoardStatus(STiles& tiles) {
-		bool allPossible = true;
-		bool allSolved = true;
-		for (int i = 0; i < tiles.size(); i++) {
-			if (!tiles[i].solved) allSolved = false;
-			if (tiles[i].possibles.size() == 0) allPossible = false;
-		}
-		if (!allPossible) return BoardStatus::IMPOSSIBLE;
-		if (!allSolved) return BoardStatus::UNSOLVED;
-		return BoardStatus::SOLVED;
 	}
 };
