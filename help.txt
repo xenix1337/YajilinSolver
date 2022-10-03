@@ -1,0 +1,26 @@
+Usage: YajilinSolver [OPTION]... [INPUT]...
+Solves provided Yajilin puzzle and outputs it in format choosen in -o flag.
+Leaves puzzle unsolved if recursion depth (-d) is too small and the puzzle too hard, or when the puzzle is impossible to solve.
+
+      --input=INPUT_FORMAT                  Sets format of the input. Possible formats:
+                                            puzzlink, code
+                                            By default, format is puzzlink
+      --output=OUTPUT_FORMAT                Sets format of the output. Possible formats:
+                                            ascii
+                                            By default, format is ascii
+      --depth=DEPTH                         Limits the depth of recursion. By default,
+                                            DEPTH = 5
+  -h, --help                                Show this help and exit the program.
+                                            
+Input formats:
+puzzlink:
+    Expects puzz.link URL, for example: https://puzz.link/p?yajilin/5/5/g41c11a21c31g
+code:
+    Two first numbers are size of the board. Next w * h words are cell descriptions. Each cell is divided by whitespaces.
+    0 - empty cell
+    X - given blockade, but with no arrow
+    (int)[U/L/D/R] - arrow in (U)p, (L)eft, (D)own, or (R)ight (for example: 3U is arrow with clue "3" pointing up)
+    
+Output formats:
+ascii:
+    Draws ASCII representation of the board.

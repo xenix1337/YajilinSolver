@@ -15,13 +15,13 @@
 
 ### Example output
 ```
-YajilinSolver.exe -i puzzlink -o ascii "https://puzz.link/p?yajilin/10/10/l42i41m32f11a22b21a21m32b12i31l11121140f"
+YajilinSolver.exe -input=puzzlink -output=ascii "https://puzz.link/p?yajilin/10/10/l42i41m32f11a22b21a21m32b12i31l11121140f"
 
 +---+---+---+---+---+---+---+---+---+---+
 |   |   |   |   |   |XXX|   |   |   |   |
-| **|***|***|***|** |XXX| **|***|***|** |
+| **|************** |XXX| **|***|***|** |
 | * |   |   |   | * |XXX| * |   |   | * |
-+---+---+---+---+---+---+---+---+---+---+
++---+---+---+---+-*-+---+---+---+---+---+
 | * |XXX|   |XXX| * |   | * |XXX|   | * |
 | * |XXX| 2>|XXX| **|***|** |XXX| **|** |
 | * |XXX|   |XXX|   |   |   |XXX| * |   |
